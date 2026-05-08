@@ -15,7 +15,6 @@ const COLORS = {
 };
 
 const LOGO_PATH = path.join(__dirname, '..', 'public', 'logo.png');
-const RAMOS_PATH = path.join(__dirname, '..', 'public', 'ramos.png');
 
 function formatDate(date) {
   if (!date) return '';
@@ -56,18 +55,9 @@ function streamVoucher(res, { player, coupleNames, weddingDate, baseUrl }) {
   if (fs.existsSync(LOGO_PATH)) {
     const logoW = 110;
     doc.image(LOGO_PATH, (pageW - logoW) / 2, y, { width: logoW });
-    y += 110;
+    y += 130;
   } else {
-    y += 20;
-  }
-
-  // Ramos top
-  if (fs.existsSync(RAMOS_PATH)) {
-    const ramosW = 200;
-    doc.image(RAMOS_PATH, (pageW - ramosW) / 2, y, { width: ramosW });
-    y += 110;
-  } else {
-    y += 20;
+    y += 30;
   }
 
   // Couple names
@@ -188,15 +178,6 @@ function streamVoucher(res, { player, coupleNames, weddingDate, baseUrl }) {
       characterSpacing: 3
     });
   y += 30;
-
-  // Ramos bottom (decorative)
-  if (fs.existsSync(RAMOS_PATH)) {
-    const ramosBottomW = 180;
-    const ramosBottomY = pageH - margin - 150;
-    doc.image(RAMOS_PATH, (pageW - ramosBottomW) / 2, ramosBottomY, {
-      width: ramosBottomW
-    });
-  }
 
   // Footer instructions
   doc

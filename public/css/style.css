@@ -82,15 +82,6 @@ h1, h2, h3 {
   height: auto;
 }
 
-.ornament-ramos {
-  display: block;
-  margin: 14px auto;
-  width: clamp(120px, 28vw, 180px);
-  height: auto;
-  opacity: 0.75;
-}
-.ornament-ramos.flip { transform: scaleX(-1); }
-
 .couple-name {
   font-family: var(--font-title);
   font-size: 13px;
