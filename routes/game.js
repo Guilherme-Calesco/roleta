@@ -5,7 +5,7 @@ const { customAlphabet } = require('nanoid');
 const Player = require('../models/Player');
 const { buildPixPayload } = require('../services/pixService');
 const { toDataURL } = require('../services/qrService');
-const { pickPrize } = require('../services/rouletteService');
+const { pickPrize, getTotalAccumulated } = require('../services/rouletteService');
 const prizesConfig = require('../config/prizes.json');
 
 const router = express.Router();
@@ -102,10 +102,15 @@ router.get('/game/roulette/:id', async (req, res, next) => {
       { name: prizesConfig.master.name, isMaster: true }
     ];
 
+    const totalAccumulated = await getTotalAccumulated();
+    const masterThreshold = Number(process.env.MASTER_THRESHOLD || 500);
+
     res.render('roulette', {
       player,
       prizes,
-      alreadySpun: Boolean(player.prize)
+      alreadySpun: Boolean(player.prize),
+      totalAccumulated,
+      masterThreshold
     });
   } catch (err) {
     next(err);

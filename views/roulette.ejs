@@ -27,6 +27,23 @@
         </div>
       </div>
     </div>
+
+    <%
+      const pct = masterThreshold > 0 ? Math.min(totalAccumulated / masterThreshold, 1) : 0;
+      const pctRounded = Math.round(pct * 100);
+      const unlocked = totalAccumulated >= masterThreshold;
+    %>
+    <aside class="master-meter<%= unlocked ? ' unlocked' : '' %>" aria-label="Progresso para o Grande Prêmio">
+      <div class="meter-label"><%= unlocked ? 'GRANDE PRÊMIO LIBERADO' : 'GRANDE PRÊMIO' %></div>
+      <div class="meter-track">
+        <div class="meter-fill" style="--fill: <%= pctRounded %>%;"></div>
+        <div class="meter-goal-mark" aria-hidden="true"></div>
+      </div>
+      <div class="meter-values">
+        <strong>R$ <%= Number(totalAccumulated).toFixed(0) %></strong>
+        <span>de <%= Number(masterThreshold).toFixed(0) %></span>
+      </div>
+    </aside>
   </div>
 
   <button type="button" class="button-premium" id="spin-btn" data-id="<%= player._id %>">
