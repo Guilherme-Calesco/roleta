@@ -36,10 +36,7 @@ html, body { height: 100%; }
 
 body {
   margin: 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
-    url('/bg.png') center/cover no-repeat fixed,
-    var(--color-bg);
+  background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
   font-weight: 300;
@@ -48,7 +45,20 @@ body {
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
+  overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
+    url('/bg.png') center / cover no-repeat;
+  pointer-events: none;
 }
 
 h1, h2, h3 {
@@ -62,26 +72,19 @@ h1, h2, h3 {
 
 .brand-header {
   text-align: center;
-  padding: clamp(16px, 4vw, 28px) 16px 8px;
+  padding: clamp(10px, 2.5vw, 18px) 16px 4px;
   background: transparent;
 }
 .brand-logo {
   display: block;
   margin: 0 auto;
-  width: clamp(80px, 18vw, 120px);
+  width: clamp(54px, 12vw, 80px);
   height: auto;
-}
-.brand-ramos {
-  display: block;
-  margin: 4px auto 0;
-  width: clamp(140px, 30vw, 200px);
-  height: auto;
-  opacity: 0.9;
 }
 
 .ornament-ramos {
   display: block;
-  margin: 18px auto;
+  margin: 14px auto;
   width: clamp(120px, 28vw, 180px);
   height: auto;
   opacity: 0.75;
