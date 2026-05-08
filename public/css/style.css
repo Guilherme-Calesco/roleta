@@ -1,12 +1,33 @@
 :root {
-  --black: #0A0A08;
-  --brown-dark: #402000;
-  --brown: #604020;
-  --gold-dark: #806040;
-  --gold: #A08060;
-  --champagne: #C0A080;
-  --beige: #D8C0A8;
-  --offwhite: #F4F0E8;
+  /* Paleta principal */
+  --color-bg: #ffffff;
+  --color-bg-soft: #f7f8f4;
+  --color-primary: #9aaa8e;       /* verde sálvia */
+  --color-primary-dark: #748366;
+  --color-primary-light: #dce3d4;
+
+  /* Textos */
+  --color-text: #3f443b;
+  --color-text-muted: #8a8f82;
+  --color-border: #e5e9df;
+
+  /* Estados */
+  --color-success: #8fa982;
+  --color-warning: #c8b47b;        /* champagne — usado em jackpot/master */
+  --color-danger: #b97878;
+
+  /* Tipografia */
+  --font-title: 'Cormorant Garamond', 'Playfair Display', serif;
+  --font-body: 'Montserrat', 'Inter', sans-serif;
+  --font-script: 'Allura', 'Great Vibes', cursive;
+
+  /* Layout */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+
+  --shadow-soft: 0 8px 30px rgba(116, 131, 102, 0.12);
+  --shadow-strong: 0 18px 40px -25px rgba(63, 68, 59, 0.35);
 }
 
 * { box-sizing: border-box; }
@@ -15,12 +36,11 @@ html, body { height: 100%; }
 
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(192,160,128,0.25), transparent 60%),
-    radial-gradient(circle at 80% 100%, rgba(216,192,168,0.35), transparent 60%),
-    var(--offwhite);
-  color: var(--black);
-  font-family: 'Montserrat', sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  letter-spacing: 0.03em;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -29,44 +49,48 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--gold-dark);
-  letter-spacing: 1px;
+  font-family: var(--font-title);
+  color: var(--color-primary-dark);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   margin: 0 0 0.4em;
-  font-weight: 600;
 }
 
 .brand-header {
   text-align: center;
   padding: clamp(16px, 4vw, 28px) 16px 8px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
 }
 .monogram {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: clamp(30px, 8vw, 44px);
-  color: var(--gold-dark);
-  letter-spacing: 4px;
+  font-family: var(--font-script);
+  font-size: clamp(38px, 9vw, 56px);
+  color: var(--color-primary-dark);
+  letter-spacing: -0.02em;
   line-height: 1;
+  font-weight: 400;
+  text-transform: none;
 }
-.monogram .amp { color: var(--gold); margin: 0 4px; }
+.monogram .amp { color: var(--color-primary); margin: 0 6px; font-style: italic; }
 .couple-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-title);
   font-size: 13px;
-  letter-spacing: 6px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--brown);
-  margin-top: 4px;
+  color: var(--color-text-muted);
+  margin-top: 8px;
+  font-weight: 300;
 }
 
 .brand-footer {
   text-align: center;
   padding: 14px 12px calc(22px + env(safe-area-inset-bottom, 0px));
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
-  font-style: italic;
-  color: var(--brown);
+  font-family: var(--font-script);
+  font-size: 18px;
+  color: var(--color-primary);
 }
-.brand-footer .dot { margin: 0 8px; color: var(--gold); }
+.brand-footer .dot { margin: 0 8px; color: var(--color-primary-light); }
 
 .page {
   flex: 1 0 auto;
@@ -74,190 +98,206 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   padding: clamp(12px, 3vw, 24px);
+  background: var(--color-bg-soft);
 }
 
 .card {
-  background: rgba(255,255,255,0.85);
-  border: 1px solid rgba(192,160,128,0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: clamp(20px, 5vw, 36px) clamp(18px, 4vw, 28px);
-  border-radius: 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 5vw, 40px) clamp(20px, 4vw, 32px);
   width: 100%;
   max-width: 460px;
-  box-shadow: 0 18px 40px -25px rgba(64,32,0,0.4);
+  box-shadow: var(--shadow-soft);
 }
 
 .card.center { text-align: center; }
 
 .display {
+  font-family: var(--font-title);
   font-size: clamp(22px, 5vw, 32px);
-  line-height: 1.15;
+  line-height: 1.2;
   margin-bottom: 12px;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
 }
 .display.prize-name {
   font-size: clamp(26px, 6vw, 38px);
-  color: var(--brown-dark);
+  color: var(--color-text);
   margin: 14px 0;
+  letter-spacing: 0.04em;
 }
 .display.prize-name.master {
   font-size: clamp(28px, 7vw, 44px);
-  background: linear-gradient(135deg, #806040, #C0A080);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 28px rgba(192,160,128,0.5);
+  color: var(--color-warning);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-weight: 400;
 }
 
 .lead {
   font-size: 15px;
-  color: var(--brown);
-  line-height: 1.5;
+  color: var(--color-text-muted);
+  line-height: 1.7;
   margin: 0 0 16px;
+  font-weight: 300;
 }
 
 .hint {
   font-size: 13px;
-  color: var(--gold-dark);
-  line-height: 1.45;
+  color: var(--color-text-muted);
+  line-height: 1.6;
   margin: 8px 0;
 }
 
 .kicker {
   font-size: 11px;
-  letter-spacing: 4px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin: 0 0 4px;
+  color: var(--color-primary);
+  margin: 0 0 6px;
+  font-weight: 400;
 }
 
 .field-label {
   display: block;
   text-align: left;
   font-size: 12px;
-  letter-spacing: 2px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brown);
-  margin: 16px 0 6px;
+  color: var(--color-primary-dark);
+  margin: 16px 0 8px;
+  font-weight: 400;
 }
 
 input[type="text"], input[type="number"] {
   width: 100%;
-  border: 1px solid rgba(128,96,64,0.35);
-  background: rgba(255,255,255,0.7);
-  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-md);
   padding: 14px 16px;
   font-size: 18px;
-  font-family: 'Montserrat', sans-serif;
-  color: var(--black);
+  font-family: var(--font-body);
+  color: var(--color-text);
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
+  font-weight: 300;
 }
 input[type="text"]:focus, input[type="number"]:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 4px rgba(192,160,128,0.18);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(154, 170, 142, 0.18);
 }
 
 .form-stack {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .button-premium {
-  background: linear-gradient(135deg, #806040, #C0A080);
+  background: var(--color-primary);
   color: white;
-  border-radius: 10px;
+  border-radius: 999px;
   border: none;
-  padding: 16px 24px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 3px;
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   cursor: pointer;
   margin-top: 18px;
-  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s, opacity 0.2s;
   text-decoration: none;
   display: inline-block;
   text-align: center;
   min-height: 48px;
 }
-.button-premium:hover { transform: translateY(-1px); box-shadow: 0 12px 24px -12px rgba(64,32,0,0.5); }
+.button-premium:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
 .button-premium:active { transform: translateY(0); }
 .button-premium:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 .button-link {
   background: transparent;
   border: none;
-  color: var(--brown-dark);
-  font-family: 'Montserrat', sans-serif;
+  color: var(--color-primary-dark);
+  font-family: var(--font-body);
   font-size: 13px;
   text-decoration: underline;
   cursor: pointer;
   padding: 0;
   min-height: 32px;
+  letter-spacing: 0.04em;
 }
-.button-link:hover { color: var(--gold-dark); }
+.button-link:hover { color: var(--color-primary); }
 
 .pix-amount {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 9vw, 52px);
-  color: var(--brown-dark);
+  font-family: var(--font-title);
+  font-size: clamp(34px, 9vw, 54px);
+  color: var(--color-primary-dark);
   margin: 8px 0 4px;
-  font-weight: 600;
+  font-weight: 300;
+  letter-spacing: 0.02em;
   word-break: break-word;
 }
 
 .qr-wrap {
   display: flex;
   justify-content: center;
-  margin: 16px auto;
-  padding: 12px;
-  background: var(--offwhite);
-  border: 1px solid rgba(192,160,128,0.4);
-  border-radius: 14px;
+  margin: 18px auto;
+  padding: 14px;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   width: fit-content;
   max-width: 100%;
 }
 .qr-wrap img { display: block; max-width: 100%; height: auto; }
-.qr-wrap.small { padding: 8px; }
+.qr-wrap.small { padding: 10px; }
 .qr-wrap.small img { width: clamp(180px, 50vw, 260px); }
 
 .pix-info {
-  margin: 12px auto 8px;
+  margin: 14px auto 8px;
   text-align: left;
   font-size: 13px;
-  color: var(--brown);
+  color: var(--color-text-muted);
 }
 .pix-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0;
-  border-bottom: 1px dashed rgba(192,160,128,0.5);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
   gap: 8px;
 }
 .pix-row:last-child { border-bottom: none; }
 .pix-label {
   font-size: 11px;
-  letter-spacing: 2px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--color-primary);
 }
 .pix-value {
-  font-weight: 600;
-  color: var(--black);
+  font-weight: 500;
+  color: var(--color-text);
   word-break: break-word;
   text-align: right;
 }
 
-.countdown-block { margin-top: 20px; }
+.countdown-block { margin-top: 22px; }
 #countdown {
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--brown-dark);
-  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--color-primary-dark);
+  font-family: var(--font-title);
 }
 
 /* Slot machine — height fixa em 96px (acoplado a ITEM_HEIGHT=96 no JS) */
@@ -269,14 +309,10 @@ input[type="text"]:focus, input[type="number"]:focus {
 .slot-frame {
   position: relative;
   height: 96px;
-  border: 2px solid var(--gold);
-  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  background: linear-gradient(180deg,
-    rgba(216,192,168,0.4) 0%,
-    rgba(255,255,255,0.7) 50%,
-    rgba(216,192,168,0.4) 100%);
-  box-shadow: inset 0 0 24px rgba(64,32,0,0.18);
+  background: var(--color-bg-soft);
 }
 .slot-pointer {
   position: absolute;
@@ -284,7 +320,7 @@ input[type="text"]:focus, input[type="number"]:focus {
   right: 0;
   top: 50%;
   height: 0;
-  border-top: 2px solid var(--brown-dark);
+  border-top: 1px solid var(--color-primary);
   transform: translateY(-1px);
   pointer-events: none;
   z-index: 2;
@@ -292,13 +328,13 @@ input[type="text"]:focus, input[type="number"]:focus {
 .slot-pointer::before, .slot-pointer::after {
   content: '';
   position: absolute;
-  top: -7px;
+  top: -5px;
   width: 0; height: 0;
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
 }
-.slot-pointer::before { left: 0; border-left: 10px solid var(--brown-dark); }
-.slot-pointer::after { right: 0; border-right: 10px solid var(--brown-dark); }
+.slot-pointer::before { left: 0; border-left: 8px solid var(--color-primary); }
+.slot-pointer::after { right: 0; border-right: 8px solid var(--color-primary); }
 
 .slot-list {
   list-style: none;
@@ -315,21 +351,20 @@ input[type="text"]:focus, input[type="number"]:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-title);
   font-size: clamp(18px, 4.5vw, 24px);
-  color: var(--brown-dark);
+  color: var(--color-text);
   text-align: center;
   padding: 0 clamp(10px, 3vw, 18px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 300;
+  letter-spacing: 0.04em;
 }
 .slot-item.master {
-  color: transparent;
-  background: linear-gradient(135deg, #806040, #C0A080);
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-weight: 700;
+  color: var(--color-warning);
+  font-weight: 400;
   font-style: italic;
 }
 
@@ -350,7 +385,7 @@ input[type="text"]:focus, input[type="number"]:focus {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 8px 16px rgba(64, 32, 0, 0.35));
+  filter: drop-shadow(0 8px 16px rgba(116, 131, 102, 0.25));
 }
 
 .slot-machine.triple {
@@ -360,27 +395,27 @@ input[type="text"]:focus, input[type="number"]:focus {
 }
 
 .slot-cabinet {
-  background: linear-gradient(180deg, #604020 0%, #402000 100%);
-  border: 3px double var(--gold);
-  border-radius: 14px;
-  padding: 10px;
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border: 1px solid var(--color-primary-dark);
+  border-radius: var(--radius-md);
+  padding: 12px;
   box-shadow:
-    inset 0 0 12px rgba(0,0,0,0.4),
-    0 8px 20px -10px rgba(64,32,0,0.5);
+    inset 0 0 12px rgba(63, 68, 59, 0.15),
+    var(--shadow-soft);
 }
 
 .slot-jackpot {
   text-align: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 14px;
-  letter-spacing: 6px;
-  color: var(--offwhite);
-  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
-  padding: 4px 0;
-  border-radius: 6px;
-  margin-bottom: 8px;
-  border: 1px solid var(--champagne);
+  font-family: var(--font-title);
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: var(--color-warning);
+  padding: 5px 0;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  font-weight: 400;
 }
 
 .slot-reels {
@@ -393,24 +428,25 @@ input[type="text"]:focus, input[type="number"]:focus {
   flex: 1 1 0;
   min-width: 0;
   height: 96px;
-  border: 2px solid var(--gold);
-  border-radius: 10px;
+  border: 1px solid var(--color-primary-light);
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  background: linear-gradient(180deg,
-    rgba(216,192,168,0.5) 0%,
-    rgba(255,255,255,0.85) 50%,
-    rgba(216,192,168,0.5) 100%);
-  box-shadow: inset 0 0 18px rgba(64,32,0,0.25);
+  background: var(--color-bg);
+  box-shadow: inset 0 0 10px rgba(63, 68, 59, 0.08);
 }
 
 .slot-machine.triple .slot-item {
   font-size: clamp(10px, 2.6vw, 14px);
   padding: 4px 6px;
   white-space: normal;
-  line-height: 1.1;
-  letter-spacing: 0.2px;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
   text-overflow: clip;
   overflow: hidden;
+  color: var(--color-primary-dark);
+}
+.slot-machine.triple .slot-item.master {
+  color: var(--color-warning);
 }
 
 @media (max-width: 600px) {
@@ -430,72 +466,74 @@ input[type="text"]:focus, input[type="number"]:focus {
 @media (max-width: 360px) {
   .slot-cabinet { padding: 8px; }
   .slot-reels { gap: 4px; }
-  .slot-jackpot { font-size: 12px; letter-spacing: 4px; }
+  .slot-jackpot { font-size: 11px; letter-spacing: 0.2em; }
 }
 
 /* Result */
 .result-card .voucher-link a {
-  color: var(--brown-dark);
+  color: var(--color-primary-dark);
   font-size: 13px;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
 }
 .master-badge {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  color: var(--brown-dark);
-  font-size: 16px;
-  margin: 4px 0 12px;
+  font-family: var(--font-script);
+  color: var(--color-warning);
+  font-size: 22px;
+  margin: 4px 0 14px;
+  letter-spacing: 0.02em;
 }
 .redemption-code {
-  margin-top: 12px;
+  margin-top: 14px;
   font-size: 13px;
-  color: var(--brown);
-  letter-spacing: 1px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
 }
 .redemption-code strong {
   font-family: 'Courier New', monospace;
-  color: var(--brown-dark);
+  color: var(--color-primary-dark);
   font-size: 18px;
   letter-spacing: 3px;
+  font-weight: 400;
 }
 
 /* Voucher */
 .voucher-page .voucher-divider {
   width: 80px;
   height: 1px;
-  background: var(--gold);
-  margin: 18px auto;
+  background: var(--color-primary);
+  opacity: 0.5;
+  margin: 20px auto;
 }
 .voucher-info {
   text-align: left;
-  margin: 18px auto;
+  margin: 20px auto;
   max-width: 320px;
 }
 .info-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px dashed rgba(192,160,128,0.5);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
   gap: 8px;
 }
 .info-row:last-child { border-bottom: none; }
 .info-label {
   font-size: 11px;
-  letter-spacing: 2px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--color-primary);
 }
 .info-value {
-  font-weight: 600;
-  color: var(--black);
+  font-weight: 500;
+  color: var(--color-text);
   word-break: break-word;
   text-align: right;
 }
 .info-value.mono {
   font-family: 'Courier New', monospace;
   letter-spacing: 2px;
-  color: var(--brown-dark);
+  color: var(--color-primary-dark);
 }
 .download-btn { width: 100%; margin-top: 8px; }
 
@@ -520,39 +558,39 @@ input[type="text"]:focus, input[type="number"]:focus {
   font-size: 12px;
 }
 .weight-name {
-  color: var(--brown-dark);
-  font-weight: 600;
+  color: var(--color-text);
+  font-weight: 500;
   grid-area: name;
   word-break: break-word;
 }
 .weight-bar-bg {
   height: 8px;
-  background: rgba(192,160,128,0.25);
+  background: var(--color-primary-light);
   border-radius: 4px;
   overflow: hidden;
   grid-area: bar;
 }
 .weight-bar-fill {
   height: 100%;
-  background: linear-gradient(135deg, #806040, #C0A080);
+  background: var(--color-primary);
   border-radius: 4px;
   width: 0;
   transition: width 0.6s ease;
 }
 .weight-value {
   font-size: 11px;
-  letter-spacing: 1px;
-  color: var(--brown);
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
   white-space: nowrap;
   grid-area: value;
 }
 
 .final-winner {
-  margin-top: 22px;
-  padding: 20px;
-  border: 1px dashed var(--gold);
-  border-radius: 14px;
-  background: rgba(216,192,168,0.18);
+  margin-top: 24px;
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-soft);
 }
 .final-winner.hidden { display: none; }
 
@@ -574,21 +612,21 @@ input[type="text"]:focus, input[type="number"]:focus {
 
 /* ============ Phones estreitos (≤360px) ============ */
 @media (max-width: 360px) {
-  .kicker { letter-spacing: 2px; }
-  .couple-name { letter-spacing: 3px; font-size: 12px; }
-  .field-label { letter-spacing: 1.5px; }
-  .button-premium { letter-spacing: 2px; padding: 14px 18px; }
+  .kicker { letter-spacing: 0.1em; }
+  .couple-name { letter-spacing: 0.12em; font-size: 12px; }
+  .field-label { letter-spacing: 0.08em; }
+  .button-premium { letter-spacing: 0.08em; padding: 14px 22px; }
   .pix-row { flex-direction: column; align-items: flex-start; gap: 4px; }
   .pix-row .pix-value, .info-row .info-value { text-align: left; }
   .info-row { flex-direction: column; align-items: flex-start; gap: 2px; }
-  .display { letter-spacing: 0.5px; }
+  .display { letter-spacing: 0.04em; }
 }
 
 /* ============ Tablets (481–1024px) ============ */
 @media (min-width: 481px) and (max-width: 1024px) {
   .card { max-width: 540px; }
   .final-roulette { max-width: 760px; }
-  .button-premium { padding: 18px 28px; font-size: 16px; min-height: 54px; }
+  .button-premium { padding: 16px 36px; font-size: 14px; min-height: 54px; }
   .lead { font-size: 16px; }
   .hint { font-size: 14px; }
   input[type="text"], input[type="number"] {
@@ -607,6 +645,6 @@ input[type="text"]:focus, input[type="number"]:focus {
   .brand-header { padding: 8px 16px 4px; }
   .brand-footer { padding: 6px 12px calc(8px + env(safe-area-inset-bottom, 0px)); }
   .page { padding: 8px 12px; }
-  .card { padding: 18px 20px; }
+  .card { padding: 18px 22px; }
   .weights { max-height: 30vh; }
 }
