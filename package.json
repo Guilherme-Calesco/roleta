@@ -1,0 +1,26 @@
+{
+  "name": "casamento-emillene-caio-roleta",
+  "version": "1.0.0",
+  "description": "Roleta de prêmios PIX para o casamento de Emillene & Caio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.5.0",
+    "nanoid": "^3.3.7",
+    "pdfkit": "^0.15.0",
+    "qrcode": "^1.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

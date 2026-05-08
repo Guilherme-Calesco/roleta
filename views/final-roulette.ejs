@@ -1,0 +1,53 @@
+<% const pageTitle = 'Sorteio Final' %>
+<%- include('partials/header') %>
+
+<section class="card center final-roulette">
+  <p class="kicker">Sorteio do Grande Prêmio</p>
+  <h2 class="display"><%= coupleNames %></h2>
+  <p class="lead">Cada nome ocupa um espaço proporcional ao valor que contribuiu.</p>
+  <p class="hint">Total acumulado: R$ <%= Number(totalAccumulated).toFixed(2).replace('.', ',') %> • <%= players.length %> convidado(s)</p>
+
+  <div class="weights">
+    <% players.forEach(function(p) { %>
+      <div class="weight-row">
+        <div class="weight-name"><%= p.name %></div>
+        <div class="weight-bar-bg">
+          <div class="weight-bar-fill" data-amount="<%= p.amountPaid %>"></div>
+        </div>
+        <div class="weight-value">R$ <%= Number(p.amountPaid).toFixed(2).replace('.', ',') %></div>
+      </div>
+    <% }) %>
+  </div>
+
+  <div class="slot-machine final" id="final-slot">
+    <div class="slot-frame">
+      <div class="slot-pointer"></div>
+      <ul class="slot-list" id="final-slot-list">
+        <% players.forEach(function(p) { %>
+          <li class="slot-item"><%= p.name %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+
+  <button type="button" class="button-premium" id="final-spin-btn" data-hash="<%= adminHash %>"
+    <%= players.length === 0 ? 'disabled' : '' %>>
+    SORTEAR PRÊMIO MÁXIMO
+  </button>
+
+  <div id="final-winner" class="final-winner hidden">
+    <p class="kicker">Vencedor(a)</p>
+    <h3 class="display" id="winner-name"></h3>
+    <p class="hint" id="winner-amount"></p>
+  </div>
+</section>
+
+<script>
+  window.__FINAL__ = {
+    adminHash: "<%= adminHash %>",
+    players: <%- JSON.stringify(players.map(function(p){return {id:String(p._id),name:p.name,amountPaid:p.amountPaid}})) %>,
+    total: <%= totalAccumulated %>
+  };
+</script>
+<script src="/js/final-roulette.js"></script>
+<%- include('partials/footer') %>

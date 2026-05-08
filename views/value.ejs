@@ -1,0 +1,26 @@
+<% const pageTitle = 'Sua contribuição' %>
+<%- include('partials/header') %>
+
+<section class="card center">
+  <h2 class="display">Olá, <%= playerName %>!</h2>
+  <p class="lead">Quanto você quer presentear os noivos para girar a roleta?</p>
+  <p class="hint">Quanto maior sua contribuição, maiores as chances no sorteio do prêmio máximo da noite 💛</p>
+
+  <form action="/game/value" method="POST" class="form-stack" id="value-form">
+    <label for="amount" class="field-label">Valor (R$)</label>
+    <input
+      type="text"
+      id="amount"
+      name="amount"
+      inputmode="decimal"
+      placeholder="0,00"
+      autocomplete="off"
+      required
+      value="<%= sessionAmount %>"
+    />
+    <button type="submit" class="button-premium">GERAR PIX</button>
+  </form>
+</section>
+
+<script src="/js/value.js"></script>
+<%- include('partials/footer') %>

@@ -1,0 +1,37 @@
+<% const pageTitle = 'Pagamento PIX' %>
+<%- include('partials/header') %>
+
+<section class="card center">
+  <h2 class="display">Faça o PIX com carinho 💛</h2>
+  <p class="lead"><%= playerName %>, escaneie o QR Code abaixo no seu app do banco.</p>
+
+  <div class="pix-amount">R$ <%= Number(amount).toFixed(2).replace('.', ',') %></div>
+
+  <div class="qr-wrap">
+    <img src="<%= qrDataUrl %>" alt="QR Code PIX" />
+  </div>
+
+  <div class="pix-info">
+    <div class="pix-row">
+      <span class="pix-label">Recebedor</span>
+      <span class="pix-value"><%= receiverName %></span>
+    </div>
+    <div class="pix-row">
+      <span class="pix-label">PIX Copia e Cola</span>
+      <button type="button" class="button-link" id="copy-pix" data-pix="<%= pixPayload %>">Copiar código</button>
+    </div>
+  </div>
+
+  <div class="countdown-block">
+    <p class="hint" id="countdown-text">Aguarde <span id="countdown">30</span>s para confirmar o pagamento...</p>
+    <button
+      type="button"
+      class="button-premium"
+      id="confirm-btn"
+      disabled
+    >CONFIRMAR PIX</button>
+  </div>
+</section>
+
+<script src="/js/pix.js"></script>
+<%- include('partials/footer') %>

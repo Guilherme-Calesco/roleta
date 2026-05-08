@@ -1,0 +1,15 @@
+{
+  "master": {
+    "name": "Lua de Mel Surpresa"
+  },
+  "regular": [
+    { "name": "Mini Garrafinha de Vinho" },
+    { "name": "Caixa de Bombons" },
+    { "name": "Sabonete Artesanal" },
+    { "name": "Vela Aromática" },
+    { "name": "Marca-páginas Personalizado" },
+    { "name": "Mini Suculenta" },
+    { "name": "Caneca Emillene & Caio" },
+    { "name": "Saquinho de Pétalas" }
+  ]
+}

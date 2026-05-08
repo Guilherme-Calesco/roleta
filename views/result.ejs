@@ -1,0 +1,25 @@
+<% const pageTitle = 'Seu prêmio' %>
+<%- include('partials/header') %>
+
+<section class="card center result-card">
+  <p class="kicker">Parabéns, <%= player.name %>!</p>
+  <h2 class="display prize-name<%= player.prize.isMaster ? ' master' : '' %>"><%= player.prize.name %></h2>
+  <% if (player.prize.isMaster) { %>
+    <p class="master-badge">★ Prêmio Master ★</p>
+  <% } %>
+
+  <div class="qr-wrap small">
+    <img src="<%= qrDataUrl %>" alt="QR Code do voucher" />
+  </div>
+  <p class="hint">Aponte a câmera do seu celular para o QR acima<br/>e baixe seu voucher.</p>
+
+  <div class="voucher-link">
+    <a href="<%= voucherUrl %>" target="_blank" rel="noopener">Abrir voucher</a>
+  </div>
+
+  <p class="redemption-code">
+    Código: <strong><%= player.redemptionCode %></strong>
+  </p>
+</section>
+
+<%- include('partials/footer') %>

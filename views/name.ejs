@@ -1,0 +1,25 @@
+<% const pageTitle = 'Boas-vindas' %>
+<%- include('partials/header') %>
+
+<section class="card center">
+  <h1 class="display">Bem-vindo(a) ao casamento de <%= coupleNames %></h1>
+  <p class="lead">Faça parte da nossa história — gire a roleta da sorte e ganhe uma lembrança nossa.</p>
+
+  <form action="/game/name" method="POST" class="form-stack">
+    <label for="name" class="field-label">Qual é o seu nome?</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Digite seu nome completo"
+      required
+      minlength="2"
+      maxlength="80"
+      autofocus
+      value="<%= sessionName %>"
+    />
+    <button type="submit" class="button-premium">PRÓXIMO</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

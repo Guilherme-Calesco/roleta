@@ -1,0 +1,32 @@
+<% const pageTitle = 'Roleta da Sorte' %>
+<%- include('partials/header') %>
+
+<section class="card center">
+  <h2 class="display">Hora de girar a roleta!</h2>
+  <p class="lead"><%= player.name %>, descubra qual lembrança você vai levar 💛</p>
+
+  <div class="slot-machine" id="slot">
+    <div class="slot-frame">
+      <div class="slot-pointer"></div>
+      <ul class="slot-list" id="slot-list">
+        <% prizes.forEach(function(prize) { %>
+          <li class="slot-item<%= prize.isMaster ? ' master' : '' %>"><%= prize.name %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+
+  <button type="button" class="button-premium" id="spin-btn" data-id="<%= player._id %>">
+    <%= alreadySpun ? 'VER RESULTADO' : 'GIRAR A ROLETA' %>
+  </button>
+</section>
+
+<script>
+  window.__ROULETTE__ = {
+    playerId: "<%= player._id %>",
+    prizes: <%- JSON.stringify(prizes) %>,
+    alreadySpun: <%= alreadySpun ? 'true' : 'false' %>
+  };
+</script>
+<script src="/js/roulette.js"></script>
+<%- include('partials/footer') %>

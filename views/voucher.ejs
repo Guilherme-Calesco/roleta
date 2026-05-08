@@ -1,0 +1,34 @@
+<% const pageTitle = 'Voucher' %>
+<%- include('partials/header') %>
+
+<section class="card center voucher-page">
+  <p class="kicker">Voucher do Casamento</p>
+  <h2 class="display"><%= coupleNames %></h2>
+  <% if (weddingDate) { %><p class="lead"><%= weddingDate %></p><% } %>
+
+  <div class="voucher-divider"></div>
+
+  <p class="kicker">Prêmio sorteado</p>
+  <h3 class="display prize-name<%= player.prize.isMaster ? ' master' : '' %>"><%= player.prize.name %></h3>
+  <% if (player.prize.isMaster) { %>
+    <p class="master-badge">★ Prêmio Master ★</p>
+  <% } %>
+
+  <div class="voucher-info">
+    <div class="info-row">
+      <span class="info-label">Convidado(a)</span>
+      <span class="info-value"><%= player.name %></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Código de resgate</span>
+      <span class="info-value mono"><%= player.redemptionCode %></span>
+    </div>
+  </div>
+
+  <a class="button-premium download-btn" href="/voucher/<%= player.voucherHash %>/pdf">
+    BAIXAR VOUCHER (PDF)
+  </a>
+  <p class="hint">Apresente o voucher impresso ou no celular aos noivos para retirar seu presente.</p>
+</section>
+
+<%- include('partials/footer') %>
