@@ -1,9 +1,8 @@
 <% const pageTitle = 'Pagamento PIX' %>
 <%- include('partials/header') %>
 
-<section class="card center">
-  <h2 class="display">Faça o PIX com carinho 💛</h2>
-  <p class="lead"><%= playerName %>, escaneie o QR Code abaixo no seu app do banco.</p>
+<section class="card center pix-page">
+  <h2 class="display">Faça o PIX 💛</h2>
 
   <div class="pix-amount">R$ <%= Number(amount).toFixed(2).replace('.', ',') %></div>
 
@@ -17,13 +16,13 @@
       <span class="pix-value"><%= receiverName %></span>
     </div>
     <div class="pix-row">
-      <span class="pix-label">PIX Copia e Cola</span>
-      <button type="button" class="button-link" id="copy-pix" data-pix="<%= pixPayload %>">Copiar código</button>
+      <span class="pix-label">Copia e Cola</span>
+      <button type="button" class="button-link" id="copy-pix" data-pix="<%= pixPayload %>">Copiar</button>
     </div>
   </div>
 
   <div class="countdown-block">
-    <p class="hint" id="countdown-text">Aguarde <span id="countdown">30</span>s para confirmar o pagamento...</p>
+    <p class="hint" id="countdown-text">Aguarde <span id="countdown">30</span>s...</p>
     <button
       type="button"
       class="button-premium"

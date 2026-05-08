@@ -309,6 +309,43 @@ input[type="text"]:focus, input[type="number"]:focus {
   font-family: var(--font-title);
 }
 
+/* Tela /game/pix — sempre cabe na viewport sem scroll */
+.pix-page {
+  padding: clamp(16px, 3.5vw, 24px) clamp(16px, 3vw, 22px);
+}
+.pix-page .display {
+  font-size: clamp(18px, 4.2vw, 24px);
+  margin-bottom: 6px;
+}
+.pix-page .pix-amount {
+  font-size: clamp(28px, 7vw, 40px);
+  margin: 4px 0 2px;
+  line-height: 1.05;
+}
+.pix-page .qr-wrap {
+  margin: 8px auto;
+  padding: 8px;
+}
+.pix-page .qr-wrap img {
+  width: clamp(160px, 42vw, 220px);
+  height: auto;
+}
+.pix-page .pix-info {
+  margin: 6px auto 4px;
+  font-size: 12px;
+}
+.pix-page .pix-row { padding: 5px 0; }
+.pix-page .pix-label { font-size: 10px; }
+.pix-page .countdown-block { margin-top: 10px; }
+.pix-page .countdown-block .hint { font-size: 12px; margin: 4px 0; }
+.pix-page #countdown { font-size: 18px; }
+.pix-page .button-premium {
+  margin-top: 8px;
+  padding: 12px 24px;
+  font-size: 13px;
+  min-height: 44px;
+}
+
 /* Slot machine — height fixa em 96px (acoplado a ITEM_HEIGHT=96 no JS) */
 .slot-machine {
   margin: 22px auto 8px;
