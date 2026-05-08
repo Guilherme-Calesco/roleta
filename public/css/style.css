@@ -36,7 +36,10 @@ html, body { height: 100%; }
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
+    url('/bg.png') center/cover no-repeat fixed,
+    var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
   font-weight: 300;
@@ -60,19 +63,31 @@ h1, h2, h3 {
 .brand-header {
   text-align: center;
   padding: clamp(16px, 4vw, 28px) 16px 8px;
-  background: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
+  background: transparent;
 }
-.monogram {
-  font-family: var(--font-script);
-  font-size: clamp(38px, 9vw, 56px);
-  color: var(--color-primary-dark);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  font-weight: 400;
-  text-transform: none;
+.brand-logo {
+  display: block;
+  margin: 0 auto;
+  width: clamp(80px, 18vw, 120px);
+  height: auto;
 }
-.monogram .amp { color: var(--color-primary); margin: 0 6px; font-style: italic; }
+.brand-ramos {
+  display: block;
+  margin: 4px auto 0;
+  width: clamp(140px, 30vw, 200px);
+  height: auto;
+  opacity: 0.9;
+}
+
+.ornament-ramos {
+  display: block;
+  margin: 18px auto;
+  width: clamp(120px, 28vw, 180px);
+  height: auto;
+  opacity: 0.75;
+}
+.ornament-ramos.flip { transform: scaleX(-1); }
+
 .couple-name {
   font-family: var(--font-title);
   font-size: 13px;
@@ -98,7 +113,7 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   padding: clamp(12px, 3vw, 24px);
-  background: var(--color-bg-soft);
+  background: transparent;
 }
 
 .card {
@@ -497,13 +512,6 @@ input[type="text"]:focus, input[type="number"]:focus {
 }
 
 /* Voucher */
-.voucher-page .voucher-divider {
-  width: 80px;
-  height: 1px;
-  background: var(--color-primary);
-  opacity: 0.5;
-  margin: 20px auto;
-}
 .voucher-info {
   text-align: left;
   margin: 20px auto;

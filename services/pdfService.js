@@ -1,15 +1,21 @@
+const path = require('path');
+const fs = require('fs');
 const PDFDocument = require('pdfkit');
 
 const COLORS = {
-  black: '#0A0A08',
-  brownDark: '#402000',
-  brown: '#604020',
-  goldDark: '#806040',
-  gold: '#A08060',
-  champagne: '#C0A080',
-  beige: '#D8C0A8',
-  offwhite: '#F4F0E8'
+  bg: '#FFFFFF',
+  bgSoft: '#F7F8F4',
+  primary: '#9AAA8E',
+  primaryDark: '#748366',
+  primaryLight: '#DCE3D4',
+  text: '#3F443B',
+  textMuted: '#8A8F82',
+  border: '#E5E9DF',
+  warning: '#C8B47B'
 };
+
+const LOGO_PATH = path.join(__dirname, '..', 'public', 'logo.png');
+const RAMOS_PATH = path.join(__dirname, '..', 'public', 'ramos.png');
 
 function formatDate(date) {
   if (!date) return '';
@@ -35,119 +41,166 @@ function streamVoucher(res, { player, coupleNames, weddingDate, baseUrl }) {
   const pageW = doc.page.width;
   const pageH = doc.page.height;
 
-  doc.rect(0, 0, pageW, pageH).fill(COLORS.offwhite);
+  doc.rect(0, 0, pageW, pageH).fill(COLORS.bg);
 
   const margin = 36;
   doc
-    .lineWidth(2)
-    .strokeColor(COLORS.gold)
+    .lineWidth(1)
+    .strokeColor(COLORS.border)
     .rect(margin, margin, pageW - margin * 2, pageH - margin * 2)
     .stroke();
 
-  doc
-    .lineWidth(0.5)
-    .strokeColor(COLORS.champagne)
-    .rect(margin + 8, margin + 8, pageW - margin * 2 - 16, pageH - margin * 2 - 16)
-    .stroke();
+  let y = margin + 28;
 
+  // Logo
+  if (fs.existsSync(LOGO_PATH)) {
+    const logoW = 110;
+    doc.image(LOGO_PATH, (pageW - logoW) / 2, y, { width: logoW });
+    y += 110;
+  } else {
+    y += 20;
+  }
+
+  // Ramos top
+  if (fs.existsSync(RAMOS_PATH)) {
+    const ramosW = 200;
+    doc.image(RAMOS_PATH, (pageW - ramosW) / 2, y, { width: ramosW });
+    y += 110;
+  } else {
+    y += 20;
+  }
+
+  // Couple names
   doc
-    .fillColor(COLORS.goldDark)
+    .fillColor(COLORS.primaryDark)
     .font('Times-Italic')
-    .fontSize(28)
-    .text(coupleNames || 'Emillene & Caio', 0, margin + 50, {
+    .fontSize(26)
+    .text(coupleNames || 'Emillene & Caio', 0, y, {
       align: 'center',
       width: pageW
     });
+  y += 36;
 
+  // Date
   doc
-    .fillColor(COLORS.brown)
+    .fillColor(COLORS.textMuted)
     .font('Helvetica')
-    .fontSize(11)
-    .text(weddingDate ? `Casamento • ${weddingDate}` : 'Casamento', 0, margin + 90, {
+    .fontSize(10)
+    .text(weddingDate ? `Casamento • ${weddingDate}` : 'Casamento', 0, y, {
       align: 'center',
-      width: pageW
+      width: pageW,
+      characterSpacing: 2
     });
+  y += 28;
 
+  // Title
   doc
-    .moveTo(pageW / 2 - 60, margin + 115)
-    .lineTo(pageW / 2 + 60, margin + 115)
-    .strokeColor(COLORS.gold)
-    .lineWidth(1)
-    .stroke();
-
-  doc
-    .fillColor(COLORS.brownDark)
+    .fillColor(COLORS.primaryDark)
     .font('Times-Bold')
-    .fontSize(22)
-    .text('VOUCHER DE PRÊMIO', 0, margin + 140, {
+    .fontSize(18)
+    .text('VOUCHER DE PRÊMIO', 0, y, {
       align: 'center',
-      width: pageW
+      width: pageW,
+      characterSpacing: 4
     });
+  y += 32;
 
+  // Prize section
   const prizeName = player.prize ? player.prize.name : 'Prêmio';
   const isMaster = player.prize && player.prize.isMaster;
 
   doc
-    .fillColor(COLORS.brown)
+    .fillColor(COLORS.primary)
     .font('Helvetica')
-    .fontSize(12)
-    .text('Prêmio sorteado', 0, margin + 210, { align: 'center', width: pageW });
+    .fontSize(10)
+    .text('PRÊMIO SORTEADO', 0, y, {
+      align: 'center',
+      width: pageW,
+      characterSpacing: 3
+    });
+  y += 18;
 
   doc
-    .fillColor(isMaster ? COLORS.brownDark : COLORS.goldDark)
-    .font('Times-Bold')
-    .fontSize(isMaster ? 30 : 24)
-    .text(prizeName, margin + 30, margin + 235, {
+    .fillColor(isMaster ? COLORS.warning : COLORS.text)
+    .font(isMaster ? 'Times-Italic' : 'Times-Bold')
+    .fontSize(isMaster ? 28 : 22)
+    .text(prizeName, margin + 30, y, {
       align: 'center',
       width: pageW - (margin + 30) * 2
     });
+  y += isMaster ? 40 : 32;
 
   if (isMaster) {
     doc
-      .fillColor(COLORS.brownDark)
+      .fillColor(COLORS.warning)
       .font('Times-Italic')
       .fontSize(13)
-      .text('★ Prêmio Master ★', 0, margin + 280, { align: 'center', width: pageW });
+      .text('★ Prêmio Master ★', 0, y, {
+        align: 'center',
+        width: pageW
+      });
+    y += 22;
   }
 
-  const detailsY = margin + 330;
-  const labelStyle = () => doc.fillColor(COLORS.brown).font('Helvetica').fontSize(10);
-  const valueStyle = () => doc.fillColor(COLORS.black).font('Helvetica-Bold').fontSize(13);
+  y += 14;
 
-  labelStyle().text('CONVIDADO(A)', margin + 60, detailsY, {
-    width: pageW - margin * 2 - 120
-  });
-  valueStyle().text(player.name, margin + 60, detailsY + 14, {
-    width: pageW - margin * 2 - 120
-  });
+  // Details
+  const detailLeftX = margin + 60;
+  const detailWidth = pageW - margin * 2 - 120;
 
-  labelStyle().text('DATA DO SORTEIO', margin + 60, detailsY + 50, {
-    width: pageW - margin * 2 - 120
-  });
-  valueStyle().text(formatDate(player.spunAt || player.createdAt), margin + 60, detailsY + 64, {
-    width: pageW - margin * 2 - 120
-  });
+  const labelStyle = () =>
+    doc.fillColor(COLORS.primary).font('Helvetica').fontSize(9);
+  const valueStyle = () =>
+    doc.fillColor(COLORS.text).font('Helvetica-Bold').fontSize(13);
 
-  labelStyle().text('CÓDIGO DE RESGATE', margin + 60, detailsY + 100, {
-    width: pageW - margin * 2 - 120
+  labelStyle().text('CONVIDADO(A)', detailLeftX, y, {
+    width: detailWidth,
+    characterSpacing: 2
   });
+  y += 13;
+  valueStyle().text(player.name, detailLeftX, y, { width: detailWidth });
+  y += 28;
+
+  labelStyle().text('DATA DO SORTEIO', detailLeftX, y, {
+    width: detailWidth,
+    characterSpacing: 2
+  });
+  y += 13;
+  valueStyle().text(
+    formatDate(player.spunAt || player.createdAt),
+    detailLeftX,
+    y,
+    { width: detailWidth }
+  );
+  y += 28;
+
+  labelStyle().text('CÓDIGO DE RESGATE', detailLeftX, y, {
+    width: detailWidth,
+    characterSpacing: 2
+  });
+  y += 13;
   doc
-    .fillColor(COLORS.brownDark)
+    .fillColor(COLORS.primaryDark)
     .font('Courier-Bold')
     .fontSize(20)
-    .text(player.redemptionCode || '----', margin + 60, detailsY + 116, {
-      width: pageW - margin * 2 - 120
+    .text(player.redemptionCode || '----', detailLeftX, y, {
+      width: detailWidth,
+      characterSpacing: 3
     });
+  y += 30;
 
-  doc
-    .moveTo(margin + 60, pageH - margin - 100)
-    .lineTo(pageW - margin - 60, pageH - margin - 100)
-    .strokeColor(COLORS.champagne)
-    .lineWidth(0.5)
-    .stroke();
+  // Ramos bottom (decorative)
+  if (fs.existsSync(RAMOS_PATH)) {
+    const ramosBottomW = 180;
+    const ramosBottomY = pageH - margin - 150;
+    doc.image(RAMOS_PATH, (pageW - ramosBottomW) / 2, ramosBottomY, {
+      width: ramosBottomW
+    });
+  }
 
+  // Footer instructions
   doc
-    .fillColor(COLORS.brown)
+    .fillColor(COLORS.textMuted)
     .font('Helvetica')
     .fontSize(9)
     .text(
@@ -159,7 +212,7 @@ function streamVoucher(res, { player, coupleNames, weddingDate, baseUrl }) {
 
   if (baseUrl && player.voucherHash) {
     doc
-      .fillColor(COLORS.goldDark)
+      .fillColor(COLORS.primary)
       .font('Helvetica-Oblique')
       .fontSize(8)
       .text(
@@ -171,12 +224,15 @@ function streamVoucher(res, { player, coupleNames, weddingDate, baseUrl }) {
   }
 
   doc
-    .fillColor(COLORS.goldDark)
+    .fillColor(COLORS.textMuted)
     .font('Times-Italic')
     .fontSize(10)
-    .text('Com amor,', 0, pageH - margin - 38, { align: 'center', width: pageW });
+    .text('Com amor,', 0, pageH - margin - 38, {
+      align: 'center',
+      width: pageW
+    });
   doc
-    .fillColor(COLORS.brownDark)
+    .fillColor(COLORS.primaryDark)
     .font('Times-Italic')
     .fontSize(13)
     .text(coupleNames || 'Emillene & Caio', 0, pageH - margin - 24, {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#A08060" />
+  <meta name="theme-color" content="#9aaa8e" />
   <title><%= typeof pageTitle !== 'undefined' ? pageTitle + ' • ' : '' %><%= coupleNames %></title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,7 +12,8 @@
 </head>
 <body>
   <header class="brand-header">
-    <div class="monogram">E <span class="amp">&amp;</span> C</div>
+    <img class="brand-logo" src="/logo.png" alt="<%= coupleNames %>" />
+    <img class="brand-ramos" src="/ramos.png" alt="" aria-hidden="true" />
     <div class="couple-name"><%= coupleNames %></div>
   </header>
   <main class="page">

@@ -2,6 +2,7 @@
 <%- include('partials/header') %>
 
 <section class="card center result-card">
+  <img class="ornament-ramos" src="/ramos.png" alt="" aria-hidden="true" />
   <p class="kicker">Parabéns, <%= player.name %>!</p>
   <h2 class="display prize-name<%= player.prize.isMaster ? ' master' : '' %>"><%= player.prize.name %></h2>
   <% if (player.prize.isMaster) { %>
