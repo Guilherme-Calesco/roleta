@@ -693,6 +693,9 @@ input[type="text"]:focus, input[type="number"]:focus {
 }
 .download-btn { width: 100%; margin-top: 8px; }
 
+/* Roleta do jogador — card mais largo para acomodar mascote + caça-níquel + meter */
+.roulette-card { max-width: 680px; }
+
 /* Final roulette (admin) */
 .final-roulette { max-width: 720px; }
 .weights {
@@ -781,6 +784,7 @@ input[type="text"]:focus, input[type="number"]:focus {
 /* ============ Tablets (481–1024px) ============ */
 @media (min-width: 481px) and (max-width: 1024px) {
   .card { max-width: 540px; }
+  .roulette-card { max-width: 680px; }
   .final-roulette { max-width: 760px; }
   .button-premium { padding: 16px 36px; font-size: 14px; min-height: 54px; }
   .lead { font-size: 16px; }
@@ -794,6 +798,11 @@ input[type="text"]:focus, input[type="number"]:focus {
   .weight-bar-bg { height: 10px; }
   .qr-wrap.small img { width: clamp(220px, 35vw, 280px); }
   .slot-machine { max-width: 460px; }
+}
+
+/* ============ Desktop (≥1025px) ============ */
+@media (min-width: 1025px) {
+  .roulette-card { max-width: 760px; }
 }
 
 /* ============ Landscape phone com pouca altura ============ */
