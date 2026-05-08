@@ -35,6 +35,11 @@ async function pickPrize() {
     }
   }
 
+  const noPrizePercent = Number(process.env.NO_PRIZE_PERCENT || 30);
+  if (Math.random() * 100 < noPrizePercent) {
+    return { name: prizesConfig.noPrize.name, isMaster: false, isEmpty: true };
+  }
+
   const regulars = prizesConfig.regular;
   const idx = Math.floor(Math.random() * regulars.length);
   return { name: regulars[idx].name, isMaster: false };

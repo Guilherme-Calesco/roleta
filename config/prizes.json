@@ -1,15 +1,21 @@
 {
+  "noPrize": {
+    "name": "Não foi dessa vez 😅"
+  },
   "master": {
-    "name": "Lua de Mel Surpresa"
+    "name": "GRANDE PRÊMIO"
   },
   "regular": [
-    { "name": "Mini Garrafinha de Vinho" },
-    { "name": "Caixa de Bombons" },
-    { "name": "Sabonete Artesanal" },
-    { "name": "Vela Aromática" },
-    { "name": "Marca-páginas Personalizado" },
-    { "name": "Mini Suculenta" },
-    { "name": "Caneca Emillene & Caio" },
-    { "name": "Saquinho de Pétalas" }
+    { "name": "Jantar com a Sogra da Emi" },
+    { "name": "Tomar um café com a Sogra do Caio" },
+    { "name": "Ida Ligga Arena com os noivos (viva o CAP)" },
+    { "name": "Dançar com a noiva" },
+    { "name": "Shot com o noivo" },
+    { "name": "Selfie com o sogro da Emi" },
+    { "name": "Pedir música pro DJ" },
+    { "name": "Passe-Livre no open bar de água" },
+    { "name": "Direito a 03 docinhos da mesa" },
+    { "name": "Lugar VIP na fila do bar" },
+    { "name": "Levar uma almofadinha da decoração" }
   ]
 }

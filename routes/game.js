@@ -98,6 +98,7 @@ router.get('/game/roulette/:id', async (req, res, next) => {
 
     const prizes = [
       ...prizesConfig.regular.map((p) => ({ name: p.name, isMaster: false })),
+      { name: prizesConfig.noPrize.name, isMaster: false, isEmpty: true },
       { name: prizesConfig.master.name, isMaster: true }
     ];
 

@@ -2,10 +2,15 @@
 <%- include('partials/header') %>
 
 <section class="card center result-card">
-  <p class="kicker">Parabéns, <%= player.name %>!</p>
-  <h2 class="display prize-name<%= player.prize.isMaster ? ' master' : '' %>"><%= player.prize.name %></h2>
-  <% if (player.prize.isMaster) { %>
-    <p class="master-badge">★ Prêmio Master ★</p>
+  <% if (player.prize.isEmpty) { %>
+    <p class="kicker">Quase, <%= player.name %>!</p>
+    <h2 class="display prize-name"><%= player.prize.name %></h2>
+  <% } else { %>
+    <p class="kicker">Parabéns, <%= player.name %>!</p>
+    <h2 class="display prize-name<%= player.prize.isMaster ? ' master' : '' %>"><%= player.prize.name %></h2>
+    <% if (player.prize.isMaster) { %>
+      <p class="master-badge">★ Prêmio Master ★</p>
+    <% } %>
   <% } %>
 
   <div class="qr-wrap small">

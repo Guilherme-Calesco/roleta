@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const PrizeSubSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    isMaster: { type: Boolean, default: false }
+    isMaster: { type: Boolean, default: false },
+    isEmpty: { type: Boolean, default: false }
   },
   { _id: false }
 );
