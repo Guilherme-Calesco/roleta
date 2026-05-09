@@ -23,14 +23,14 @@ async function pickPrize() {
   const masterUnlocked = total >= threshold;
 
   if (masterUnlocked) {
-    if (mode === 'once') {
-      const already = await masterAlreadyAwarded();
-      if (!already) {
+    const already = await masterAlreadyAwarded();
+    if (!already) {
+      if (mode === 'once') {
         return { name: prizesConfig.master.name, isMaster: true };
-      }
-    } else if (mode === 'chance') {
-      if (Math.random() * 100 < chancePercent) {
-        return { name: prizesConfig.master.name, isMaster: true };
+      } else if (mode === 'chance') {
+        if (Math.random() * 100 < chancePercent) {
+          return { name: prizesConfig.master.name, isMaster: true };
+        }
       }
     }
   }
