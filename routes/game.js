@@ -20,6 +20,13 @@ router.get('/', (req, res) => {
   res.render('name', { sessionName: req.session.playerName || '' });
 });
 
+router.get('/game/restart', (req, res) => {
+  delete req.session.playerName;
+  delete req.session.amount;
+  delete req.session.playerId;
+  res.redirect('/');
+});
+
 router.post('/game/name', (req, res) => {
   const name = String(req.body.name || '').trim();
   if (!name || name.length < 2) {
